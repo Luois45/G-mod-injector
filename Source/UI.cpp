@@ -1,4 +1,8 @@
 #include "Header/Main.h"
+#include "ThirdParty/ImGui/imgui.h"
+#include "ThirdParty/ImGui/imgui_impl_win32.h"
+#include "ThirdParty/ImGui/imgui_impl_dx11.h"
+
 
 HWND Injector::UI::MainWindowHandle = NULL;
 ID3D11Device* Injector::UI::g_pd3dDevice = NULL;
@@ -13,8 +17,8 @@ bool Injector::UI::CreateDirectXDeviceAndSwapChain(HWND hWnd)
     DXGI_SWAP_CHAIN_DESC sd;
     ZeroMemory(&sd, sizeof(sd));
     sd.BufferCount = 2;
-    sd.BufferDesc.Width = 0;
-    sd.BufferDesc.Height = 0;
+    sd.BufferDesc.Width = 3;
+    sd.BufferDesc.Height = 4;
     sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
     sd.BufferDesc.RefreshRate.Numerator = 60;
     sd.BufferDesc.RefreshRate.Denominator = 1;
@@ -111,15 +115,26 @@ char* Injector::UI::ShowSelectFileDialogAndReturnPath()
     }
 }
 
+
 void Injector::UI::SetImGuiStyles()
 {
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(ImColor(45, 0, 0, 255)));
-    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(ImColor(255, 0, 0, 255)));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(ImColor(205, 0, 0, 255)));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(ImColor(205, 0, 0, 255)));
-    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(ImColor(120, 0, 35, 255)));
-    ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(ImColor(205, 0, 0, 255)));
-    ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(ImColor(26, 26, 26, 255)));
+    ImGui::StyleColorsDark(); // Use the dark color scheme
+
+    // Adjust window corner rounding and padding
+    ImGui::GetStyle().WindowRounding = 5.0f;
+    ImGui::GetStyle().FramePadding = ImVec2(6.0f, 4.0f);
+    ImGui::GetStyle().ItemSpacing = ImVec2(8.0f, 6.0f);
+    ImGui::GetStyle().ScrollbarSize = 12.0f;
+
+    // Adjust button colors
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(0.6f, 0.2f, 0.9f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered] = ImVec4(0.8f, 0.4f, 0.6f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_ButtonActive] = ImVec4(0.9f, 0.5f, 0.7f, 1.0f);
+
+    // Adjust window colors
+    ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImVec4(0.05f, 0.05f, 0.05f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_TitleBg] = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_TitleBgActive] = ImVec4(0.2f, 0.2f, 0.2f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.1f, 0.1f, 0.1f, 1.0f);
+    ImGui::GetStyle().Colors[ImGuiCol_PopupBg] = ImVec4(0.2f, 0.2f, 0.2f, 1.0f);
 }

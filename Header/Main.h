@@ -34,7 +34,7 @@ namespace Injector
 		extern ID3D11DeviceContext* g_pd3dDeviceContext;
 		extern ID3D11RenderTargetView* g_mainRenderTargetView;
 		extern char* SelectedModuleFile;
-		static char TargetProcessNameOrIDBufferInput[51];
+		static char TargetProcessNameOrIDBufferInput[51] = "GTA5.exe";
 		extern std::string PopupNotificationMessage;
 		extern HWND MainWindowHandle;
 		LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);

@@ -6,7 +6,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     WNDCLASSEX WindowClass = { sizeof(WNDCLASSEX), CS_CLASSDC, UI::WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("SMI_MainWindow"), NULL };
     RegisterClassEx(&WindowClass);
 
-    std::string WindowTitle = "TnyavnTo's Module Injector - v" + TMI_BUILD;
+    std::string WindowTitle = "NIGHTMARE Module Injector - v" + TMI_BUILD;
     std::wstring WindowTitleWString = std::wstring(WindowTitle.begin(), WindowTitle.end());
     UI::MainWindowHandle = CreateWindow(WindowClass.lpszClassName, WindowTitleWString.c_str(), WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX, 100, 100, 500, 188, NULL, NULL, WindowClass.hInstance, NULL);
 
@@ -29,6 +29,15 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     ImGui_ImplDX11_Init(UI::g_pd3dDevice, UI::g_pd3dDeviceContext);
     std::string FontLocation = std::getenv("SystemDrive") + (std::string)"\\Windows\\Fonts\\Verdana.ttf";
     io.Fonts->AddFontFromFileTTF(FontLocation.c_str(), 23.f);
+    
+    // Set ImGui styles before creating ImGui context
+    Injector::UI::SetImGuiStyles();
+
+    // Initialize ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui_ImplWin32_Init(Injector::UI::MainWindowHandle);
+    ImGui_ImplDX11_Init(Injector::UI::g_pd3dDevice, Injector::UI::g_pd3dDeviceContext);
 
     //Window Loop
     MSG Message = { 0 };
@@ -66,11 +75,11 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         ImGui::Begin("MainWindow", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
  
         //Module Select Section
-        ImGui::Text("Module Name:");
+        ImGui::Text("Gta 5 mod dll bitch:");
         ImGui::SameLine();
         if (UI::SelectedModuleFile != NULL) { ImGui::TextWrapped(PathFindFileNameA(UI::SelectedModuleFile)); }
         ImGui::SameLine(ImGui::GetWindowWidth() - 160);
-        if (ImGui::SmallButton("Select Module")) 
+        if (ImGui::SmallButton("Select Mod bitch")) 
         {
             char* SelectedFile = UI::ShowSelectFileDialogAndReturnPath();
             if (SelectedFile != NULL)
@@ -87,16 +96,16 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         }
 
         //Process Name Input Section
-        ImGui::Text("Process Name/ID:");
+        ImGui::Text("Night Name/ID:");
         ImGui::SameLine();
         ImGui::PushItemWidth(292);
         ImGui::InputText("##ProcessNameOrIDInput", UI::TargetProcessNameOrIDBufferInput, IM_ARRAYSIZE(UI::TargetProcessNameOrIDBufferInput), ImGuiInputTextFlags_CharsNoBlank);
         ImGui::Dummy(ImVec2(0, 5));
-        if (ImGui::Button("Inject Module", ImVec2(470, 35)))
+        if (ImGui::Button("Inject 2 GTA 5", ImVec2(470, 35)))
         {
             if (!UI::SelectedModuleFile)
             {
-               UI::PopupNotificationMessage = "You must select a module first";
+               UI::PopupNotificationMessage = "select a module bitch";
             }
             else
             {
@@ -125,7 +134,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         }
         if (ImGui::BeginPopupModal("About TMI###AboutPopup", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar))
         {
-            std::string AuthorText = "Author: TnyavnTo\nCompiled: " + (std::string)__DATE__ + " " + (std::string)__TIME__ + "\nGitHub: https://github.com/svxy";
+            std::string AuthorText = "Author: s_nightmare_s\nCompiled: " + (std::string)__DATE__ + " " + (std::string)__TIME__ + "\nDC: soon";
             ImGui::TextWrapped(AuthorText.c_str());
             if (ImGui::Button("Close", ImVec2(500, 0)))
             {
