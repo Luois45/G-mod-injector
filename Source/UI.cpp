@@ -121,15 +121,18 @@ void Injector::UI::SetImGuiStyles()
     ImGui::StyleColorsDark(); // Use the dark color scheme
 
     // Adjust window corner rounding and padding
-    ImGui::GetStyle().WindowRounding = 5.0f;
+    ImGui::GetStyle().WindowRounding = 10.0f; // Increase this value to make the corners more rounded
     ImGui::GetStyle().FramePadding = ImVec2(6.0f, 4.0f);
     ImGui::GetStyle().ItemSpacing = ImVec2(8.0f, 6.0f);
     ImGui::GetStyle().ScrollbarSize = 12.0f;
 
-    // Adjust button colors
-    ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(0.6f, 0.2f, 0.9f, 1.0f);
-    ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered] = ImVec4(0.8f, 0.4f, 0.6f, 1.0f);
-    ImGui::GetStyle().Colors[ImGuiCol_ButtonActive] = ImVec4(0.9f, 0.5f, 0.7f, 1.0f);
+    // Adjust button rounding and padding
+    ImGui::GetStyle().GrabRounding = ImGui::GetStyle().FrameRounding = ImGui::GetStyle().ScrollbarRounding = 5.0f;
+
+    // Adjust button colors (RGB values from 0 to 1)
+    ImGui::GetStyle().Colors[ImGuiCol_Button] = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);       // Red
+    ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered] = ImVec4(0.0f, 0.0f, 1.0f, 1.0f); // Blue (changed color)
+    ImGui::GetStyle().Colors[ImGuiCol_ButtonActive] = ImVec4(0.0f, 0.0f, 1.0f, 1.0f);  // Blue (same as hovered)
 
     // Adjust window colors
     ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImVec4(0.05f, 0.05f, 0.05f, 1.0f);

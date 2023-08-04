@@ -97,7 +97,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
 
         ImGui::Dummy(ImVec2(0, 5));
-        if (ImGui::Button("Inject 2 GTA 5", ImVec2(470, 80)))
+        if (ImGui::Button("Inject 2 GTA 5", ImVec2(470, 95)))
         {
             if (!UI::SelectedModuleFile)
             {
