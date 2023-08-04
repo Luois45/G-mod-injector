@@ -15,5 +15,5 @@ jobs:
     - name: Upload EXE
       uses: actions/upload-artifact@v2
       with:
-        name: SimpleModuleInjector.exe
+        name: BuildArtifacts_x64
         path: Build/SimpleModuleInjector.exe
