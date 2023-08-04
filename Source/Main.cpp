@@ -78,7 +78,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         ImGui::Text("Gta 5 mod dll bitch:");
         ImGui::SameLine();
         if (UI::SelectedModuleFile != NULL) { ImGui::TextWrapped(PathFindFileNameA(UI::SelectedModuleFile)); }
-        ImGui::SameLine(ImGui::GetWindowWidth() - 160);
+        ImGui::SameLine(ImGui::GetWindowWidth() - 200);
         if (ImGui::SmallButton("Select Mod bitch")) 
         {
             char* SelectedFile = UI::ShowSelectFileDialogAndReturnPath();
@@ -95,13 +95,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
             }
         }
 
-        //Process Name Input Section
-        ImGui::Text("Night Name/ID:");
-        ImGui::SameLine();
-        ImGui::PushItemWidth(292);
-        ImGui::InputText("##ProcessNameOrIDInput", UI::TargetProcessNameOrIDBufferInput, IM_ARRAYSIZE(UI::TargetProcessNameOrIDBufferInput), ImGuiInputTextFlags_CharsNoBlank);
+
         ImGui::Dummy(ImVec2(0, 5));
-        if (ImGui::Button("Inject 2 GTA 5", ImVec2(470, 35)))
+        if (ImGui::Button("Inject 2 GTA 5", ImVec2(470, 80)))
         {
             if (!UI::SelectedModuleFile)
             {
@@ -128,19 +124,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
                 }
             }
         }
-        if (ImGui::Button("About", ImVec2(470, 30)))
-        {
-            ImGui::OpenPopup("About TMI###AboutPopup");
-        }
-        if (ImGui::BeginPopupModal("About TMI###AboutPopup", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar))
-        {
-            std::string AuthorText = "Author: s_nightmare_s\nCompiled: " + (std::string)__DATE__ + " " + (std::string)__TIME__ + "\nDC: soon";
-            ImGui::TextWrapped(AuthorText.c_str());
-            if (ImGui::Button("Close", ImVec2(500, 0)))
-            {
-                ImGui::CloseCurrentPopup();
-            }
-        }
+      
 
         ImGui::End();
         ImGui::Render();
