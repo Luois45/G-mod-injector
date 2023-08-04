@@ -1,0 +1,19 @@
+name: Build with EXE Upload
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+    - name: Build EXE
+      run: msbuild SimpleModuleInjector.vcxproj -t:rebuild -property:Configuration=Release -property:Platform=x64
+    - name: Upload EXE
+      uses: actions/upload-artifact@v2
+      with:
+        name: BuildArtifacts_x64
+        path: Build/SimpleModuleInjector.exe
