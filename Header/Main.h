@@ -16,7 +16,7 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "Shlwapi.lib")
 
-static const std::string TMI_BUILD = "1.0.0.5";
+static const std::string TMI_BUILD = "1.0.0";
 
 namespace Injector
 {
